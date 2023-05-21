@@ -77,6 +77,10 @@ class UserEventsFragment : Fragment() {
 
         })
 
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_userEventsFragment_to_dashboardFragment)
+        }
+
         return binding.root
     }
 
