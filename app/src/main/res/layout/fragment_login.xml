@@ -52,7 +52,7 @@
                 android:textColorHint="#4071b2" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/editTextTextPersonName1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -68,7 +68,7 @@
                 android:textColorHint="#4071b2" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/proceedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
