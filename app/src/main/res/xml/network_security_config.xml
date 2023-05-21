@@ -3,4 +3,4 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">18.185.8.100</domain>
     </domain-config>
-</network-secu  rity-config>
+</network-security-config>
