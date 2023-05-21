@@ -26,5 +26,9 @@
             android:id="@+id/userEventsFragment"
             android:name="com.example.eventsapp.fragments.UserEventsFragment"
             tools:layout="@layout/fragment_user_events"
-            android:label="UserEventsFragment" />
+            android:label="UserEventsFragment" >
+        <action
+                android:id="@+id/action_userEventsFragment_to_dashboardFragment"
+                app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>
