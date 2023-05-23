@@ -30,5 +30,17 @@
         <action
                 android:id="@+id/action_userEventsFragment_to_dashboardFragment"
                 app:destination="@id/dashboardFragment" />
+        <action
+                android:id="@+id/action_userEventsFragment_to_newEventFragment"
+                app:destination="@id/newEventFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/newEventFragment"
+            android:name="com.example.eventsapp.fragments.NewEventFragment"
+            android:label="fragment_new_event"
+            tools:layout="@layout/fragment_new_event" >
+        <action
+                android:id="@+id/action_newEventFragment_to_userEventsFragment"
+                app:destination="@id/userEventsFragment" />
     </fragment>
 </navigation>
