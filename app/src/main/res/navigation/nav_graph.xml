@@ -21,6 +21,9 @@
         <action
                 android:id="@+id/action_dashboardFragment_to_userEventsFragment"
                 app:destination="@id/userEventsFragment" />
+        <action
+                android:id="@+id/action_dashboardFragment_to_generalEventsFragment"
+                app:destination="@id/generalEventsFragment" />
     </fragment>
     <fragment
             android:id="@+id/userEventsFragment"
@@ -29,6 +32,14 @@
             android:label="UserEventsFragment" >
         <action
                 android:id="@+id/action_userEventsFragment_to_dashboardFragment"
+                app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/generalEventsFragment"
+            android:name="com.example.eventsapp.fragments.GeneralEventsFragment"
+            android:label="GeneralEventsFragment" >
+        <action
+                android:id="@+id/action_generalEventsFragment_to_dashboardFragment"
                 app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

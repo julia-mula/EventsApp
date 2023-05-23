@@ -93,7 +93,7 @@
                                 android:background="@drawable/white_background">
 
                             <ImageView
-                                    android:id="@+id/imageView8"
+                                    android:id="@+id/generalEventsButton"
                                     android:layout_width="55dp"
                                     android:layout_height="59dp"
                                     android:layout_marginStart="8dp"

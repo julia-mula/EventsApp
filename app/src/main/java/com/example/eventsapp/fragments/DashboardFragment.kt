@@ -29,6 +29,10 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_dashboardFragment_to_userEventsFragment)
         }
 
+        binding.generalEventsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_generalEventsFragment)
+        }
+
         return binding.root
     }
 }
