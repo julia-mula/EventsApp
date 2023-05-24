@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eventsapp.ApiService
 import com.example.eventsapp.Event
+import com.example.eventsapp.GeneralEvent
 import com.example.eventsapp.R
 import com.example.eventsapp.adapters.GeneralEventsRecyclerAdapter
 import com.example.eventsapp.databinding.FragmentGeneralEventsBinding
@@ -26,8 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class GeneralEventsFragment : Fragment() {
     private lateinit var binding: FragmentGeneralEventsBinding
-    private var userId: Int? = null
-    private lateinit var generalEvents: ArrayList<Event>
+    private lateinit var generalEvents: ArrayList<GeneralEvent>
     private lateinit var mRecyclerViewAdapter: GeneralEventsRecyclerAdapter
 
 
@@ -52,13 +52,13 @@ class GeneralEventsFragment : Fragment() {
 
         val api: ApiService = retrofit.create(ApiService::class.java)
 
-        val generalEventsCall: Call<ArrayList<Event>> = api.getGeneralEvents(1)
+        val generalEventsCall: Call<ArrayList<GeneralEvent>> = api.getGeneralEvents()
 
-        generalEventsCall.enqueue(object: Callback<ArrayList<Event>?> {
+        generalEventsCall.enqueue(object: Callback<ArrayList<GeneralEvent>?> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
-                call: Call<ArrayList<Event>?>,
-                response: Response<ArrayList<Event>?>
+                call: Call<ArrayList<GeneralEvent>?>,
+                response: Response<ArrayList<GeneralEvent>?>
             ) {
                 if (response.isSuccessful){
                     generalEvents.clear()
@@ -72,7 +72,7 @@ class GeneralEventsFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Event>?>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<GeneralEvent>?>, t: Throwable) {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
             }

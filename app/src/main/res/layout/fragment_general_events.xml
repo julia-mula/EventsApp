@@ -32,7 +32,7 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/generalEventsRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="354dp"
                 android:padding="12dp" />
 
         <LinearLayout
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity=""
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="1dp"
                     app:srcCompat="@drawable/btn_login"
                     android:scaleX="-1"
                     android:scaleY="-1" />

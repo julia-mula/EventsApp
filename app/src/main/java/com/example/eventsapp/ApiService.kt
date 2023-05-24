@@ -9,6 +9,6 @@ interface ApiService {
     @GET("/users/{userId}/events")
     fun getUserEvents(@Path("userId") userId: Int): Call<ArrayList<Event>>
 
-    @GET("/users/{userId}/generalEvents")
-    fun getGeneralEvents(@Path("userId") userId: Int): Call<ArrayList<Event>>
+    @GET("/nearby_events")
+    fun getGeneralEvents(): Call<ArrayList<GeneralEvent>>
 }
