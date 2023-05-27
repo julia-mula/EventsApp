@@ -30,7 +30,6 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private var userId: Int? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,33 +51,35 @@ class LoginFragment : Fragment() {
             val username: String = binding.editTextUsername.text.toString()
             val password: String = binding.editTextPassword.text.toString()
             val loginData = LoginJson(username=username, password=password)
-            Log.d("DATA", "$username, $password")
 
-            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+            val loginCall = api.loginUser(loginData)
 
-            //TODO login endpoint
-//            val loginCall = api.loginUser(loginData)
-//
-//            loginCall.enqueue(object: Callback<LoginResponse> {
-//                @SuppressLint("NotifyDataSetChanged")
-//                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                    Log.d("DATA", response.toString())
-//                    if (response.isSuccessful){
-//                        val loginResponse = response.body()
-//                        findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
-//
-//                    } else if (response.code() == 401) {
-//                        Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
-//                        findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_SHORT).show()
-//                    t.printStackTrace()
-//                }
-//
-//            })
+            loginCall.enqueue(object: Callback<LoginResponse> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    Log.d("DATA", response.toString())
+                    if (response.isSuccessful){
+                        val loginResponse: LoginResponse? = response.body()
+
+                        val responseUserId = loginResponse!!.id
+                        val responseUsername = loginResponse.username
+                        val bundle = Bundle()
+                        bundle.putInt("id", responseUserId)
+                        bundle.putString("username", responseUsername)
+
+                        findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment, bundle)
+
+                    } else if (response.code() == 401) {
+                        Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_SHORT).show()
+                    t.printStackTrace()
+                }
+
+            })
         }
 
         return binding.root

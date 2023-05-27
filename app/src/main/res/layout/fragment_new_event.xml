@@ -116,6 +116,26 @@
                         android:textColorHint="#4071b2" />
 
 
+                <Button
+                        android:id="@+id/pickImageButton"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="Pick image"
+                        android:background="@drawable/banner_background" />
+
+
+                <ImageView
+                        android:id="@+id/chosenImage"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
