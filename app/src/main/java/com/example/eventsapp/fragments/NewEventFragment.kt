@@ -31,6 +31,9 @@ import java.io.FileOutputStream
 
 class NewEventFragment : Fragment() {
     private lateinit var binding: FragmentNewEventBinding
+    private lateinit var imageUrl: String
+    private var userId: Int = 0
+    private lateinit var username: String
 
     companion object {
         val IMAGE_REQUEST_CODE = 1_000;
@@ -46,6 +49,11 @@ class NewEventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNewEventBinding.inflate(inflater, container, false)
+
+        userId = arguments?.getInt("id")!!
+        username = arguments?.getString("username")!!
+
+        Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
 
         binding.backButton.setOnClickListener {
             findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment)
@@ -80,9 +88,39 @@ class NewEventFragment : Fragment() {
                 override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
                     if (response.isSuccessful){
                         val uploadedFileResponse: UploadResponse? = response.body()
-                        if (uploadedFileResponse != null){
-                            val imageUrl = uploadedFileResponse.imageUrl
-                        }
+                        imageUrl = uploadedFileResponse!!.imageUrl
+
+
+
+                        val event = NewEvent(
+                            title = binding.newEventTitle.text.toString(),
+                            description = binding.newEventDescription.text.toString(),
+                            imageUrl = imageUrl,
+                            fileUrl = "https://example.com/event3.pdf",
+                            localization = "Location 3",
+                            eventLink = binding.newEventLink.text.toString(),
+                            date = binding.newEventLink.text.toString(),
+                            userId = userId
+                        )
+
+                        val newEventCall = apiService.createUserEvent(userId, event)
+
+
+                        newEventCall.enqueue(object : Callback<Event> {
+                            override fun onResponse(call: Call<Event>, response: Response<Event>) {
+                                if (response.isSuccessful){
+                                    val bundle = Bundle()
+                                    bundle.putInt("id", userId)
+                                    bundle.putString("username", username)
+                                    findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment, bundle)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<Event>, t: Throwable) {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                            }
+                        })
+
                     }
                 }
 
@@ -91,31 +129,7 @@ class NewEventFragment : Fragment() {
                 }
             })
 
-//            val event = NewEvent(
-//                title = "Event 3",
-//                description = "Description of Event 3",
-//                imageUrl = "https://example.com/event3.jpg",
-//                fileUrl = "https://example.com/event3.pdf",
-//                localization = "Location 3",
-//                eventLink = "https://example.com/event3",
-//                date = "2023-05-20 19:00",
-//                userId = 1
-//            )
-//
-//            val call = apiService.createUserEvent(1, event)
-//
-//
-//            call.enqueue(object : Callback<Event> {
-//                override fun onResponse(call: Call<Event>, response: Response<Event>) {
-//                    if (response.isSuccessful){
-//                        findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment)
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<Event>, t: Throwable) {
-//                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-//                }
-//            })
+
         }
 
         return binding.root

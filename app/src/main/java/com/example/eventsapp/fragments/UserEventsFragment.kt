@@ -24,9 +24,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class UserEventsFragment : Fragment() {
     private lateinit var binding: FragmentUserEventsBinding
-    private var userId: Int? = null
+    private var userId: Int = 0
     private lateinit var userEvents: ArrayList<Event>
     private lateinit var mRecyclerViewAdapter: UserEventsRecyclerAdapter
+
+    private lateinit var username: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,11 @@ class UserEventsFragment : Fragment() {
     ): View? {
         binding = FragmentUserEventsBinding.inflate(inflater, container, false)
 
+        userId = arguments?.getInt("id")!!
+        username = arguments?.getString("username")!!
+
+        Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
+
         userEvents = ArrayList()
 
         mRecyclerViewAdapter = UserEventsRecyclerAdapter(userEvents)
@@ -50,7 +57,7 @@ class UserEventsFragment : Fragment() {
 
         val api: ApiService = retrofit.create(ApiService::class.java)
 
-        val recipesCall: Call<ArrayList<Event>> = api.getUserEvents(1)
+        val recipesCall: Call<ArrayList<Event>> = api.getUserEvents(userId!!)
 
         recipesCall.enqueue(object: Callback<ArrayList<Event>?> {
             @SuppressLint("NotifyDataSetChanged")
@@ -82,7 +89,10 @@ class UserEventsFragment : Fragment() {
         }
 
         binding.addEventButton.setOnClickListener {
-            findNavController().navigate(R.id.action_userEventsFragment_to_newEventFragment)
+            val bundle = Bundle()
+            bundle.putInt("id", userId)
+            bundle.putString("username", username)
+            findNavController().navigate(R.id.action_userEventsFragment_to_newEventFragment, bundle)
         }
 
         return binding.root
