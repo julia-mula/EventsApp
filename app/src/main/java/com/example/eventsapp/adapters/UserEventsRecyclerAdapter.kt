@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.eventsapp.Event
 import com.example.eventsapp.databinding.RecyclerViewEventsBinding
+import com.squareup.picasso.Picasso
 
 class UserEventsRecyclerAdapter(private val userEvents: ArrayList<Event>) : RecyclerView.Adapter<UserEventsRecyclerAdapter.MyViewHolder>() {
 
@@ -20,7 +21,9 @@ class UserEventsRecyclerAdapter(private val userEvents: ArrayList<Event>) : Recy
     }
 
     inner class MyViewHolder(binding: RecyclerViewEventsBinding, listener: onItemClickListener) : ViewHolder(binding.root) {
-            val eventText = binding.eventText
+        val eventTitle = binding.eventTitle
+        val eventDate = binding.eventDate
+        val eventImage = binding.eventImage
 
         init {
             itemView.setOnClickListener {
@@ -37,7 +40,9 @@ class UserEventsRecyclerAdapter(private val userEvents: ArrayList<Event>) : Recy
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.eventText.text = userEvents[position].title
+        holder.eventTitle.text = userEvents[position].title
+        holder.eventDate.text = userEvents[position].date
+        Picasso.get().load(userEvents[position].imageUrl).into(holder.eventImage)
     }
 
     override fun getItemCount(): Int {
