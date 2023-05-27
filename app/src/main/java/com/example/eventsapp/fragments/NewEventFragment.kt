@@ -116,7 +116,7 @@ class NewEventFragment : Fragment() {
                             fileUrl = "https://example.com/event3.pdf",
                             localization = localization!!,
                             eventLink = binding.newEventLink.text.toString(),
-                            date = binding.newEventLink.text.toString(),
+                            date = binding.newEventDate.text.toString(),
                             userId = userId
                         )
 

@@ -108,11 +108,10 @@ class AllEventsMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun parseLocation(location: String): LatLng{
-        return LatLng(37.7749, -122.4194)
-//        val latLngValues = location.split(", ")
-//        val latitude = latLngValues[0].toDouble()
-//        val longitude = latLngValues[1].toDouble()
-//
-//        return LatLng(latitude, longitude)
+        val latLngValues = location.split(", ")
+        val latitude = latLngValues[0].toDouble()
+        val longitude = latLngValues[1].toDouble()
+
+        return LatLng(latitude, longitude)
     }
 }
