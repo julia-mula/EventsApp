@@ -1,6 +1,10 @@
 package com.example.eventsapp.fragments
 
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -89,6 +93,21 @@ class EventViewFragment : Fragment(), OnMapReadyCallback {
         val longitude = latLngValues[1].toDouble()
 
         return LatLng(latitude, longitude)
+    }
+
+
+    private fun downloadFile(context: Context, fileUrl: String, fileName: String) {
+        val request = DownloadManager.Request(Uri.parse(fileUrl))
+            .setTitle(fileName)
+            .setDescription("Downloading")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setDestinationInExternalPublicDir(
+                Environment.DIRECTORY_DOWNLOADS,
+                fileName
+            )
+
+        val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager.enqueue(request)
     }
 
 }
