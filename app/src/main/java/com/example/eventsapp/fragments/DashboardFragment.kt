@@ -33,8 +33,6 @@ class DashboardFragment : Fragment() {
 
         binding.dashboardUsername.text = username
 
-        Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
-
         binding.userEventsButton.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("id", userId)

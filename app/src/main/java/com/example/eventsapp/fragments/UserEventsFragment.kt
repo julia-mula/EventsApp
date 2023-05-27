@@ -45,8 +45,6 @@ class UserEventsFragment : Fragment() {
         userId = arguments?.getInt("id")!!
         username = arguments?.getString("username")!!
 
-        Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
-
         userEvents = ArrayList()
 
         mRecyclerViewAdapter = UserEventsRecyclerAdapter(userEvents)
@@ -106,7 +104,23 @@ class UserEventsFragment : Fragment() {
 
         mRecyclerViewAdapter.setOnItemClickListener(object : UserEventsRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+
+                val bundle = Bundle()
+                val currentEvent: Event = userEvents.get(position)
+
+                bundle.putInt("id", userId)
+                bundle.putString("username", username)
+
+                bundle.putString("title", currentEvent.title)
+                bundle.putString("description", currentEvent.description)
+                bundle.putString("imageUrl", currentEvent.imageUrl)
+                bundle.putString("fileUrl", currentEvent.fileUrl)
+                bundle.putString("localization", currentEvent.localization)
+                bundle.putString("eventLink", currentEvent.eventLink)
+                bundle.putString("date", currentEvent.date)
+                bundle.putInt("eventId", currentEvent.id)
+
+                findNavController().navigate(R.id.action_userEventsFragment_to_eventViewFragment, bundle)
             }
         })
     }

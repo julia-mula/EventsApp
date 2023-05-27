@@ -57,7 +57,6 @@ class LoginFragment : Fragment() {
             loginCall.enqueue(object: Callback<LoginResponse> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    Log.d("DATA", response.toString())
                     if (response.isSuccessful){
                         val loginResponse: LoginResponse? = response.body()
 

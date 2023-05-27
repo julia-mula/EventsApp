@@ -36,6 +36,9 @@
         <action
                 android:id="@+id/action_userEventsFragment_to_newEventFragment"
                 app:destination="@id/newEventFragment" />
+        <action
+                android:id="@+id/action_userEventsFragment_to_eventViewFragment"
+                app:destination="@id/eventViewFragment" />
     </fragment>
     <fragment
             android:id="@+id/newEventFragment"
@@ -65,5 +68,13 @@
         <action
                 android:id="@+id/action_newEventMapFragment_to_newEventFragment"
                 app:destination="@id/newEventFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/eventViewFragment"
+            android:name="com.example.eventsapp.fragments.EventViewFragment"
+            android:label="EventViewFragment" >
+        <action
+                android:id="@+id/action_eventViewFragment_to_userEventsFragment"
+                app:destination="@id/userEventsFragment" />
     </fragment>
 </navigation>
