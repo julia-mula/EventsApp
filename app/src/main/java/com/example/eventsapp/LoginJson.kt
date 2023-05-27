@@ -1,7 +1,7 @@
 package com.example.eventsapp
 
 class LoginJson(
-    username: String,
-    password: String
+    val username: String,
+    val password: String
 ) {
 }

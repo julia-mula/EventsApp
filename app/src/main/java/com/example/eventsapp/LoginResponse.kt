@@ -1,7 +1,7 @@
 package com.example.eventsapp
 
 class LoginResponse(
-    id: Int,
-    username: String
+    val id: Int,
+    val username: String
 ) {
 }
