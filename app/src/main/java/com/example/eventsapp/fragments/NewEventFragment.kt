@@ -56,7 +56,10 @@ class NewEventFragment : Fragment() {
         Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
 
         binding.backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment)
+            val bundle = Bundle()
+            bundle.putInt("id", userId)
+            bundle.putString("username", username)
+            findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment, bundle)
         }
 
         binding.pickImageButton.setOnClickListener {

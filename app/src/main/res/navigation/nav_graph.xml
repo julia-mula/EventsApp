@@ -21,6 +21,9 @@
         <action
                 android:id="@+id/action_dashboardFragment_to_userEventsFragment"
                 app:destination="@id/userEventsFragment" />
+        <action
+                android:id="@+id/action_dashboardFragment_to_allEventsMapFragment"
+                app:destination="@id/allEventsMapFragment" />
     </fragment>
     <fragment
             android:id="@+id/userEventsFragment"
@@ -42,5 +45,14 @@
         <action
                 android:id="@+id/action_newEventFragment_to_userEventsFragment"
                 app:destination="@id/userEventsFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/allEventsMapFragment"
+            android:name="com.example.eventsapp.fragments.AllEventsMapFragment"
+            android:label="fragment_all_events_map"
+            tools:layout="@layout/fragment_all_events_map" >
+        <action
+                android:id="@+id/action_allEventsMapFragment_to_dashboardFragment"
+                app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

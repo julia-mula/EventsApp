@@ -24,12 +24,14 @@
 
                 <ImageView
                         android:id="@+id/imageView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="415dp"
+                        android:layout_height="259dp"
+                        android:layout_marginTop="-5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/top_background2" />
+                        app:srcCompat="@drawable/top_background2"
+                        app:layout_constraintHorizontal_bias="0.0" />
 
                 <ImageView
                         android:id="@+id/imageView4"
@@ -55,7 +57,7 @@
                         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
                 <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/dashboardUsername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
@@ -132,7 +134,7 @@
                                 android:background="@drawable/white_background">
 
                             <ImageView
-                                    android:id="@+id/imageView7"
+                                    android:id="@+id/allEventsMapButton"
                                     android:layout_width="66dp"
                                     android:layout_height="65dp"
                                     android:layout_marginStart="8dp"

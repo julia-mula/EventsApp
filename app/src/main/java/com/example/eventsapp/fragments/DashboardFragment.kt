@@ -31,6 +31,8 @@ class DashboardFragment : Fragment() {
         userId = arguments?.getInt("id")!!
         username = arguments?.getString("username")!!
 
+        binding.dashboardUsername.text = username
+
         Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
 
         binding.userEventsButton.setOnClickListener {
@@ -38,6 +40,13 @@ class DashboardFragment : Fragment() {
             bundle.putInt("id", userId)
             bundle.putString("username", username)
             findNavController().navigate(R.id.action_dashboardFragment_to_userEventsFragment, bundle)
+        }
+
+        binding.allEventsMapButton.setOnClickListener{
+            val bundle = Bundle()
+            bundle.putInt("id", userId)
+            bundle.putString("username", username)
+            findNavController().navigate(R.id.action_dashboardFragment_to_allEventsMapFragment, bundle)
         }
 
         return binding.root
