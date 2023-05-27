@@ -67,8 +67,8 @@ class UserEventsFragment : Fragment() {
             ) {
                 if (response.isSuccessful){
                     userEvents.clear()
-                    for (recipe in response.body()!!){
-                        userEvents.add(recipe)
+                    for (event in response.body()!!){
+                        userEvents.add(event)
                     }
                     binding.userEventsRecyclerView.adapter?.notifyDataSetChanged()
 

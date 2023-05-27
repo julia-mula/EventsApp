@@ -93,8 +93,6 @@ class NewEventFragment : Fragment() {
                         val uploadedFileResponse: UploadResponse? = response.body()
                         imageUrl = uploadedFileResponse!!.imageUrl
 
-
-
                         val event = NewEvent(
                             title = binding.newEventTitle.text.toString(),
                             description = binding.newEventDescription.text.toString(),
