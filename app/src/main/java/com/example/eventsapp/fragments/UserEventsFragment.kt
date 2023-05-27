@@ -67,8 +67,8 @@ class UserEventsFragment : Fragment() {
             ) {
                 if (response.isSuccessful){
                     userEvents.clear()
-                    for (recipe in response.body()!!){
-                        userEvents.add(recipe)
+                    for (event in response.body()!!){
+                        userEvents.add(event)
                     }
                     binding.userEventsRecyclerView.adapter?.notifyDataSetChanged()
 
@@ -85,7 +85,10 @@ class UserEventsFragment : Fragment() {
         })
 
         binding.backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_userEventsFragment_to_dashboardFragment)
+            val bundle = Bundle()
+            bundle.putInt("id", userId)
+            bundle.putString("username", username)
+            findNavController().navigate(R.id.action_userEventsFragment_to_dashboardFragment, bundle)
         }
 
         binding.addEventButton.setOnClickListener {
