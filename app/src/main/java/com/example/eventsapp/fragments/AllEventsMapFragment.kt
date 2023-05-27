@@ -60,9 +60,6 @@ class AllEventsMapFragment : Fragment(), OnMapReadyCallback {
             findNavController().navigate(R.id.action_allEventsMapFragment_to_dashboardFragment, bundle)
         }
 
-        val supportFragmentManager = (activity as FragmentActivity).supportFragmentManager
-
-
         return binding.root
     }
 

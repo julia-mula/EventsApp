@@ -55,8 +55,6 @@ class NewEventFragment : Fragment() {
         username = arguments?.getString("username")!!
         localization = arguments?.getString("localization")
 
-        Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
-
         binding.backButton.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("id", userId)
