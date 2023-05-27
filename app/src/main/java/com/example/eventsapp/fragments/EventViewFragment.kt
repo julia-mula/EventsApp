@@ -71,6 +71,10 @@ class EventViewFragment : Fragment(), OnMapReadyCallback {
 
         }
 
+        binding.downloadButton.setOnClickListener {
+            downloadFile(requireContext(), fileUrl, "ticket.pdf")
+        }
+
         return binding.root
     }
 
@@ -99,6 +103,7 @@ class EventViewFragment : Fragment(), OnMapReadyCallback {
     private fun downloadFile(context: Context, fileUrl: String, fileName: String) {
         val request = DownloadManager.Request(Uri.parse(fileUrl))
             .setTitle(fileName)
+            .setMimeType("image/jpg")
             .setDescription("Downloading")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(

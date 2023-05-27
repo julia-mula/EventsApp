@@ -1,5 +1,6 @@
 package com.example.eventsapp.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.util.Log
 import com.example.eventsapp.UploadResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -32,9 +34,12 @@ import java.io.FileOutputStream
 class NewEventFragment : Fragment() {
     private lateinit var binding: FragmentNewEventBinding
     private lateinit var imageUrl: String
+    private lateinit var ticketUrl: String
     private var userId: Int = 0
     private lateinit var username: String
     private var localization: String? = null
+
+    private val chosenImagesList: ArrayList<Uri> = ArrayList()
 
     companion object {
         val IMAGE_REQUEST_CODE = 1_000;
@@ -107,35 +112,65 @@ class NewEventFragment : Fragment() {
                         val uploadedFileResponse: UploadResponse? = response.body()
                         imageUrl = uploadedFileResponse!!.imageUrl
 
-                        val event = NewEvent(
-                            title = binding.newEventTitle.text.toString(),
-                            description = binding.newEventDescription.text.toString(),
-                            imageUrl = imageUrl,
-                            fileUrl = "https://example.com/event3.pdf",
-                            localization = localization!!,
-                            eventLink = binding.newEventLink.text.toString(),
-                            date = binding.newEventDate.text.toString(),
-                            userId = userId
-                        )
+                        val chosenFile = binding.chosenTicket
+                        val fileBitmap = (chosenFile.drawable as BitmapDrawable).bitmap
+                        val ticketFile = File(requireContext().cacheDir, "image2.jpg")
+                        val fileOutputStream = FileOutputStream(ticketFile)
+                        fileBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+                        fileOutputStream.flush()
+                        fileOutputStream.close()
+                        val requestTicketFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                        val imageTicketPart = MultipartBody.Part.createFormData("file", ticketFile.name, requestTicketFile)
 
-                        val newEventCall = apiService.createUserEvent(userId, event)
+                        val ticketFileCall = apiService.uploadImage(imageTicketPart)
 
-
-                        newEventCall.enqueue(object : Callback<Event> {
-                            override fun onResponse(call: Call<Event>, response: Response<Event>) {
+                        ticketFileCall.enqueue(object: Callback<UploadResponse> {
+                            @SuppressLint("NotifyDataSetChanged")
+                            override fun onResponse(
+                                call: Call<UploadResponse>,
+                                response: Response<UploadResponse>
+                            ) {
                                 if (response.isSuccessful){
-                                    val bundle = Bundle()
-                                    bundle.putInt("id", userId)
-                                    bundle.putString("username", username)
-                                    findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment, bundle)
+                                    val uploadedTicketFileResponse: UploadResponse? = response.body()
+                                    ticketUrl = uploadedTicketFileResponse!!.imageUrl
+
+                                    val event = NewEvent(
+                                        title = binding.newEventTitle.text.toString(),
+                                        description = binding.newEventDescription.text.toString(),
+                                        imageUrl = imageUrl,
+                                        fileUrl = ticketUrl,
+                                        localization = localization!!,
+                                        eventLink = binding.newEventLink.text.toString(),
+                                        date = binding.newEventDate.text.toString(),
+                                        userId = userId
+                                    )
+
+                                    val newEventCall = apiService.createUserEvent(userId, event)
+
+
+                                    newEventCall.enqueue(object : Callback<Event> {
+                                        override fun onResponse(call: Call<Event>, response: Response<Event>) {
+                                            if (response.isSuccessful){
+                                                val bundle = Bundle()
+                                                bundle.putInt("id", userId)
+                                                bundle.putString("username", username)
+                                                findNavController().navigate(R.id.action_newEventFragment_to_userEventsFragment, bundle)
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<Event>, t: Throwable) {
+                                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
                                 }
                             }
 
-                            override fun onFailure(call: Call<Event>, t: Throwable) {
+                            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
                                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                                t.printStackTrace()
                             }
-                        })
 
+                        })
                     }
                 }
 
@@ -160,7 +195,15 @@ class NewEventFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            binding.chosenImage.setImageURI(data?.data)
+            val imageUri: Uri? = data?.data
+            imageUri?.let {
+                chosenImagesList.add(it)
+            }
+            if (chosenImagesList.size <= 1){
+                binding.chosenImage.setImageURI(imageUri)
+            } else {
+                binding.chosenTicket.setImageURI(imageUri)
+            }
         }
     }
 
