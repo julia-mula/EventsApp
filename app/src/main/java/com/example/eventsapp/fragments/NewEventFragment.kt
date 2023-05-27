@@ -34,6 +34,7 @@ class NewEventFragment : Fragment() {
     private lateinit var imageUrl: String
     private var userId: Int = 0
     private lateinit var username: String
+    private var localization: String? = null
 
     companion object {
         val IMAGE_REQUEST_CODE = 1_000;
@@ -52,6 +53,7 @@ class NewEventFragment : Fragment() {
 
         userId = arguments?.getInt("id")!!
         username = arguments?.getString("username")!!
+        localization = arguments?.getString("localization")
 
         Toast.makeText(context, userId.toString(), Toast.LENGTH_SHORT).show()
 
@@ -64,6 +66,20 @@ class NewEventFragment : Fragment() {
 
         binding.pickImageButton.setOnClickListener {
             pickImageFromGallery()
+        }
+
+        binding.addFile.setOnClickListener {
+            pickImageFromGallery()
+        }
+
+        binding.localizationButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", userId)
+            bundle.putString("username", username)
+            if (localization != null) {
+                bundle.putString("localization", localization)
+            }
+            findNavController().navigate(R.id.action_newEventFragment_to_newEventMapFragment, bundle)
         }
 
         binding.confirmEventButton.setOnClickListener {
@@ -98,7 +114,7 @@ class NewEventFragment : Fragment() {
                             description = binding.newEventDescription.text.toString(),
                             imageUrl = imageUrl,
                             fileUrl = "https://example.com/event3.pdf",
-                            localization = "Location 3",
+                            localization = localization!!,
                             eventLink = binding.newEventLink.text.toString(),
                             date = binding.newEventLink.text.toString(),
                             userId = userId

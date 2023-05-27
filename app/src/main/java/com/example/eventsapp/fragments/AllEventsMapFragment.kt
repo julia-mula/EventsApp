@@ -13,7 +13,6 @@ import com.example.eventsapp.ApiService
 import com.example.eventsapp.Event
 import com.example.eventsapp.R
 import com.example.eventsapp.databinding.FragmentAllEventsMapBinding
-import com.example.eventsapp.databinding.FragmentDashboardBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
