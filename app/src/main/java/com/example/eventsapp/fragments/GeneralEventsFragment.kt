@@ -12,7 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eventsapp.ApiService
 import com.example.eventsapp.Event
+import com.example.eventsapp.GeneralEvent
 import com.example.eventsapp.R
+import com.example.eventsapp.adapters.GeneralEventsRecyclerAdapter
+import com.example.eventsapp.databinding.FragmentGeneralEventsBinding
 import com.example.eventsapp.databinding.FragmentUserEventsBinding
 import com.example.recipesapp.fragments.Adapters.UserEventsRecyclerAdapter
 import retrofit2.Call
@@ -22,12 +25,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class UserEventsFragment : Fragment() {
-    private lateinit var binding: FragmentUserEventsBinding
-    private var userId: Int = 0
-    private lateinit var userEvents: ArrayList<Event>
-    private lateinit var mRecyclerViewAdapter: UserEventsRecyclerAdapter
+class GeneralEventsFragment : Fragment() {
+    private lateinit var binding: FragmentGeneralEventsBinding
+    private lateinit var generalEvents: ArrayList<GeneralEvent>
+    private lateinit var mRecyclerViewAdapter: GeneralEventsRecyclerAdapter
 
+    private var userId: Int = 0
     private lateinit var username: String
 
 
@@ -40,42 +43,42 @@ class UserEventsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentUserEventsBinding.inflate(inflater, container, false)
+        binding = FragmentGeneralEventsBinding.inflate(inflater, container, false)
 
         userId = arguments?.getInt("id")!!
         username = arguments?.getString("username")!!
 
-        userEvents = ArrayList()
+        generalEvents = ArrayList()
 
-        mRecyclerViewAdapter = UserEventsRecyclerAdapter(userEvents)
-        binding.userEventsRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerViewAdapter = GeneralEventsRecyclerAdapter(generalEvents)
+        binding.generalEventsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://18.185.8.100/")
             .addConverterFactory(GsonConverterFactory.create()).build()
 
         val api: ApiService = retrofit.create(ApiService::class.java)
 
-        val recipesCall: Call<ArrayList<Event>> = api.getUserEvents(userId!!)
+        val generalEventsCall: Call<ArrayList<GeneralEvent>> = api.getGeneralEvents()
 
-        recipesCall.enqueue(object: Callback<ArrayList<Event>?> {
+        generalEventsCall.enqueue(object: Callback<ArrayList<GeneralEvent>?> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
-                call: Call<ArrayList<Event>?>,
-                response: Response<ArrayList<Event>?>
+                call: Call<ArrayList<GeneralEvent>?>,
+                response: Response<ArrayList<GeneralEvent>?>
             ) {
                 if (response.isSuccessful){
-                    userEvents.clear()
+                    generalEvents.clear()
                     for (event in response.body()!!){
-                        userEvents.add(event)
+                        generalEvents.add(event)
                     }
-                    binding.userEventsRecyclerView.adapter?.notifyDataSetChanged()
+                    binding.generalEventsRecyclerView.adapter?.notifyDataSetChanged()
 
-                    binding.userEventsRecyclerView.adapter = mRecyclerViewAdapter
+                    binding.generalEventsRecyclerView.adapter = mRecyclerViewAdapter
 
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Event>?>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<GeneralEvent>?>, t: Throwable) {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
             }
@@ -86,14 +89,7 @@ class UserEventsFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt("id", userId)
             bundle.putString("username", username)
-            findNavController().navigate(R.id.action_userEventsFragment_to_dashboardFragment, bundle)
-        }
-
-        binding.addEventButton.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putInt("id", userId)
-            bundle.putString("username", username)
-            findNavController().navigate(R.id.action_userEventsFragment_to_newEventFragment, bundle)
+            findNavController().navigate(R.id.action_generalEventsFragment_to_dashboardFragment, bundle)
         }
 
         return binding.root
@@ -102,10 +98,10 @@ class UserEventsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mRecyclerViewAdapter.setOnItemClickListener(object : UserEventsRecyclerAdapter.onItemClickListener{
+        mRecyclerViewAdapter.setOnItemClickListener(object : GeneralEventsRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
-                val currentEvent: Event = userEvents.get(position)
+                val currentEvent: GeneralEvent = generalEvents.get(position)
 
                 bundle.putInt("id", userId)
                 bundle.putString("username", username)
@@ -113,13 +109,12 @@ class UserEventsFragment : Fragment() {
                 bundle.putString("title", currentEvent.title)
                 bundle.putString("description", currentEvent.description)
                 bundle.putString("imageUrl", currentEvent.imageUrl)
-                bundle.putString("fileUrl", currentEvent.fileUrl)
                 bundle.putString("localization", currentEvent.localization)
                 bundle.putString("eventLink", currentEvent.eventLink)
                 bundle.putString("date", currentEvent.date)
                 bundle.putInt("eventId", currentEvent.id)
 
-                findNavController().navigate(R.id.action_userEventsFragment_to_eventViewFragment, bundle)
+                findNavController().navigate(R.id.action_generalEventsFragment_to_generalEventViewFragment, bundle)
             }
         })
     }

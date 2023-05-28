@@ -22,6 +22,10 @@
                 android:id="@+id/action_dashboardFragment_to_userEventsFragment"
                 app:destination="@id/userEventsFragment" />
         <action
+                android:id="@+id/action_dashboardFragment_to_generalEventsFragment"
+                app:destination="@id/generalEventsFragment" />
+
+        <action
                 android:id="@+id/action_dashboardFragment_to_allEventsMapFragment"
                 app:destination="@id/allEventsMapFragment" />
     </fragment>
@@ -76,5 +80,24 @@
         <action
                 android:id="@+id/action_eventViewFragment_to_userEventsFragment"
                 app:destination="@id/userEventsFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/generalEventsFragment"
+            android:name="com.example.eventsapp.fragments.GeneralEventsFragment"
+            android:label="GeneralEventsFragment" >
+        <action
+                android:id="@+id/action_generalEventsFragment_to_dashboardFragment"
+                app:destination="@id/dashboardFragment" />
+        <action
+                android:id="@+id/action_generalEventsFragment_to_generalEventViewFragment"
+                app:destination="@id/generalEventViewFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/generalEventViewFragment"
+            android:name="com.example.eventsapp.fragments.GeneralEventViewFragment"
+            android:label="GeneralEventViewFragment" >
+        <action
+                android:id="@+id/action_generalEventViewFragment_to_generalEventsFragment"
+                app:destination="@id/generalEventsFragment" />
     </fragment>
 </navigation>

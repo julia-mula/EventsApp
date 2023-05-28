@@ -50,6 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity=""
+                        android:layout_marginLeft="-10dp"
                         android:layout_marginTop="16dp"
                         app:srcCompat="@drawable/btn_login"
                         android:scaleX="-1"
