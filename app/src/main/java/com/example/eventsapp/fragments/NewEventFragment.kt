@@ -119,7 +119,7 @@ class NewEventFragment : Fragment() {
                         fileBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                         fileOutputStream.flush()
                         fileOutputStream.close()
-                        val requestTicketFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                        val requestTicketFile = ticketFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
                         val imageTicketPart = MultipartBody.Part.createFormData("file", ticketFile.name, requestTicketFile)
 
                         val ticketFileCall = apiService.uploadImage(imageTicketPart)
