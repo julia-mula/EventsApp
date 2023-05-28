@@ -100,7 +100,21 @@ class GeneralEventsFragment : Fragment() {
 
         mRecyclerViewAdapter.setOnItemClickListener(object : GeneralEventsRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                val currentEvent: GeneralEvent = generalEvents.get(position)
+
+                bundle.putInt("id", userId)
+                bundle.putString("username", username)
+
+                bundle.putString("title", currentEvent.title)
+                bundle.putString("description", currentEvent.description)
+                bundle.putString("imageUrl", currentEvent.imageUrl)
+                bundle.putString("localization", currentEvent.localization)
+                bundle.putString("eventLink", currentEvent.eventLink)
+                bundle.putString("date", currentEvent.date)
+                bundle.putInt("eventId", currentEvent.id)
+
+                findNavController().navigate(R.id.action_generalEventsFragment_to_generalEventViewFragment, bundle)
             }
         })
     }

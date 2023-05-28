@@ -104,7 +104,6 @@ class UserEventsFragment : Fragment() {
 
         mRecyclerViewAdapter.setOnItemClickListener(object : UserEventsRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-
                 val bundle = Bundle()
                 val currentEvent: Event = userEvents.get(position)
 

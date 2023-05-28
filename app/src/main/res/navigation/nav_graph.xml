@@ -88,5 +88,16 @@
         <action
                 android:id="@+id/action_generalEventsFragment_to_dashboardFragment"
                 app:destination="@id/dashboardFragment" />
+        <action
+                android:id="@+id/action_generalEventsFragment_to_generalEventViewFragment"
+                app:destination="@id/generalEventViewFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/generalEventViewFragment"
+            android:name="com.example.eventsapp.fragments.GeneralEventViewFragment"
+            android:label="GeneralEventViewFragment" >
+        <action
+                android:id="@+id/action_generalEventViewFragment_to_generalEventsFragment"
+                app:destination="@id/generalEventsFragment" />
     </fragment>
 </navigation>
