@@ -30,6 +30,9 @@ class GeneralEventsFragment : Fragment() {
     private lateinit var generalEvents: ArrayList<GeneralEvent>
     private lateinit var mRecyclerViewAdapter: GeneralEventsRecyclerAdapter
 
+    private var userId: Int = 0
+    private lateinit var username: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,9 @@ class GeneralEventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGeneralEventsBinding.inflate(inflater, container, false)
+
+        userId = arguments?.getInt("id")!!
+        username = arguments?.getString("username")!!
 
         generalEvents = ArrayList()
 
@@ -80,7 +86,10 @@ class GeneralEventsFragment : Fragment() {
         })
 
         binding.backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_generalEventsFragment_to_dashboardFragment)
+            val bundle = Bundle()
+            bundle.putInt("id", userId)
+            bundle.putString("username", username)
+            findNavController().navigate(R.id.action_generalEventsFragment_to_dashboardFragment, bundle)
         }
 
         return binding.root

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C6DDE7"
+        tools:context=".MainActivity">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/top_background1" />
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-96dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="Add \nEvent"
+                    android:textColor="#4071b2"
+                    android:textSize="38sp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                        android:id="@+id/newEventTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/edittext_background"
+                        android:drawableStart="@drawable/name"
+                        android:drawablePadding="16dp"
+                        android:ems="10"
+                        android:hint="Title"
+                        android:inputType="textPersonName"
+                        android:padding="8dp"
+                        android:textColorHint="#4071b2" />
+
+                <EditText
+                        android:id="@+id/newEventDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/edittext_background"
+                        android:drawableStart="@drawable/name"
+                        android:drawablePadding="16dp"
+                        android:ems="10"
+                        android:hint="Description"
+                        android:inputType="textPersonName"
+                        android:padding="8dp"
+                        android:textColorHint="#4071b2" />
+
+                <EditText
+                        android:id="@+id/newEventLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/edittext_background"
+                        android:drawableStart="@drawable/name"
+                        android:drawablePadding="16dp"
+                        android:ems="10"
+                        android:hint="Event link"
+                        android:inputType="textPersonName"
+                        android:padding="8dp"
+                        android:textColorHint="#4071b2" />
+
+
+                <Button
+                        android:id="@+id/localizationButton"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="Localization"
+                        android:background="@drawable/banner_background" />
+
+
+                <EditText
+                        android:id="@+id/newEventDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/edittext_background"
+                        android:drawableStart="@drawable/name"
+                        android:drawablePadding="16dp"
+                        android:ems="10"
+                        android:hint="Date"
+                        android:inputType="textPersonName"
+                        android:padding="8dp"
+                        android:textColorHint="#4071b2" />
+
+
+                <Button
+                        android:id="@+id/pickImageButton"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="Pick image"
+                        android:background="@drawable/banner_background" />
+
+
+                <ImageView
+                        android:id="@+id/chosenImage"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                <Button
+                        android:id="@+id/addFile"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="Add file"
+                        android:background="@drawable/banner_background" />
+
+                <ImageView
+                        android:id="@+id/chosenTicket"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center">
+
+
+                    <Button
+                            android:id="@+id/backButton"
+                            android:layout_width="160dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="Back"
+                            android:background="@drawable/banner_background" />
+
+
+                    <Button
+                            android:id="@+id/confirmEventButton"
+                            android:layout_width="160dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:text="Confirm"
+                            android:layout_weight="1"
+                            android:background="@drawable/banner_background" />
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout >

@@ -9,6 +9,7 @@ import com.example.eventsapp.GeneralEvent
 import com.example.eventsapp.databinding.RecyclerViewEventsBinding
 import com.example.eventsapp.databinding.RecyclerViewGeneralEventsBinding
 import com.example.recipesapp.fragments.Adapters.UserEventsRecyclerAdapter
+import com.squareup.picasso.Picasso
 
 class GeneralEventsRecyclerAdapter(private val generalEvents: ArrayList<GeneralEvent>) : RecyclerView.Adapter<GeneralEventsRecyclerAdapter.MyViewHolder>(){
 
@@ -23,7 +24,9 @@ class GeneralEventsRecyclerAdapter(private val generalEvents: ArrayList<GeneralE
     }
 
     inner class MyViewHolder(binding: RecyclerViewGeneralEventsBinding, listener: onItemClickListener) : ViewHolder(binding.root) {
-        val eventText = binding.eventText
+        val eventTitle = binding.eventTitle
+        val eventDate = binding.eventDate
+        val eventImage = binding.eventImage
 
         init {
             itemView.setOnClickListener {
@@ -39,7 +42,9 @@ class GeneralEventsRecyclerAdapter(private val generalEvents: ArrayList<GeneralE
     }
 
     override fun onBindViewHolder(holder: GeneralEventsRecyclerAdapter.MyViewHolder, position: Int) {
-        holder.eventText.text = generalEvents[position].title
+        holder.eventTitle.text = generalEvents[position].title
+        holder.eventDate.text = generalEvents[position].date
+        Picasso.get().load(generalEvents[position].imageUrl).into(holder.eventImage)
     }
 
     override fun getItemCount(): Int {

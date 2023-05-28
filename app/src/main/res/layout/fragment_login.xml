@@ -36,7 +36,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/editTextUsername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -46,13 +46,13 @@
                 android:drawableStart="@drawable/email"
                 android:drawablePadding="16dp"
                 android:ems="10"
-                android:hint="Email"
+                android:hint="Username"
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 android:textColorHint="#4071b2" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName1"
+                android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
