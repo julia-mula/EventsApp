@@ -21,6 +21,9 @@ interface ApiService {
     @POST("/users/{userId}/events")
     fun createUserEvent(@Path("userId") userId: Int, @Body event: NewEvent): Call<Event>
 
+    @GET("/random_event")
+    fun getRandomEvent(): Call<GeneralEvent>
+
     @Headers("Content-Type: application/json")
     @POST("/login")
     fun loginUser(@Body loginBody: LoginJson): Call<LoginResponse>
